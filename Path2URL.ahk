@@ -57,14 +57,14 @@ GuiDropFiles:
 
  GuiControl,, Fileedit, %filepath%
  VarSetCapacity( fileurl, 2000, 0 )
- DllCall( "shlwapi\UrlCreateFromPath", Str,filepath, Str,fileurl, UIntP,2000, Str,"NULL" )
+ urlsz = 2000
+ DllCall( "shlwapi\UrlCreateFromPath", Str,filepath, Str,fileurl, UIntP,urlsz, UInt,0 )
  finalurl = %fileurl%
- fileurl =
  GuiControl,, Urledit, %finalurl%
  return
  
 ButtonCopyURLtoClipboard:
- clipboard =	; empty the clipboard firstfile
+ clipboard =	; empty the clipboard first
  clipboard = %finalurl%
  return
 
