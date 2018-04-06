@@ -6,8 +6,3 @@ This script was created to easily create URL addresses from local files. The ori
 The script creates a GUI window that waits for a file to be dragged onto it. It then shows 1) the file that was dropped with its full path and 2) the created canonical URL address. The URL address can be either manually copy-pasted or copied to clipboard by clicking on the button to do it.
 
 The core of the script uses Shell Lightweight Utility Functions (i.e. shlwapi.dll), which is a built-in property of Windows. 
-
-TODO:
-* drag and drop support
-* copy to clipboard button
-* include .exe version to be used on systems with no AutoHotkey installed
