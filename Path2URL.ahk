@@ -21,3 +21,53 @@
 ; The core of the script uses Shell Lightweight Utility Functions (i.e. shlwapi.dll),
 ; which is a built-in property of Windows. 
 
+; -----
+; GENERAL SETUP, DON'T EDIT, COMMENTS PROVIDED FOR CLARIFICATION.
+SendMode, Input                         ; Recommended for new scripts due to its superior speed and reliability.
+#NoEnv                                  ; Recommended for performance and compatibility with future AutoHotkey releases.
+#SingleInstance FORCE                   ; There can be only one instance of this script running.
+#NoTrayIcon                             ; This script should behave as much as a normal GUI program, no tray needed.
+SetWorkingDir, %A_ScriptDir%            ; Ensures a consistent starting directory.
+StringCaseSense, On                     ; Turns on case-sensitivity.
+FileEncoding, UTF-8                     ; The default encoding is UTF-8, since it seems to be most compatible.
+
+EnvGet, Env_Path, Path
+filepath =
+fileurl =
+finalurl =
+
+Gui, New, , Convert local file path to URL
+Gui, Font, s8, Courier New
+Gui, Add, Text,, Drag and drop the file on this Window to create a valid URL link.
+Gui, Add, Text,, Dropped file:
+Gui, Add, Edit, w480 r2 vFileedit c1212F2 ReadOnly,
+Gui, Add, Text,, URL link for the file:
+Gui, Add, Edit, w480 r4 vUrledit c1212F2 ReadOnly,
+Gui, Add, Button, Default, Copy URL to Clipboard
+Gui, Show
+return
+
+GuiDropFiles:
+ Loop, Parse, A_GuiEvent, `n
+ {
+	firstfile = %A_LoopField%
+	Break
+ }
+ filepath = %firstfile%
+
+ GuiControl,, Fileedit, %filepath%
+ VarSetCapacity( fileurl, 2000, 0 )
+ DllCall( "shlwapi\UrlCreateFromPath", Str,filepath, Str,fileurl, UIntP,2000, Str,"NULL" )
+ finalurl = %fileurl%
+ fileurl =
+ GuiControl,, Urledit, %finalurl%
+ return
+ 
+ButtonCopyURLtoClipboard:
+ clipboard =	; empty the clipboard firstfile
+ clipboard = %finalurl%
+ return
+
+GuiClose:
+GuiEscape:
+ ExitApp
