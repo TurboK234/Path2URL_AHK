@@ -1,5 +1,5 @@
 ; Path2URL - AutoHotkey script to convert file paths to URL
-; Copyright (c) 2016 Henrik Söderström
+; Copyright (c) 2018 Henrik Söderström
 ; This script is published under Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) licence.
 ; You are free to use the script as you please, even commercially, but you should publish the edited code
 ; under the same licence and give the original creator appropriate credit. More information about the licence
